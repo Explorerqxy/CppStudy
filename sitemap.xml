@@ -1,143 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
     <url>
      <loc>/</loc>
-     <lastmod>2018-07-05</lastmod>
+     <lastmod>2018-07-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
+        
     <url>
-     <loc>/CppPrimer/ch01 开始/</loc>
-     <lastmod>2018-07-05</lastmod>
+     <loc></loc>
+     <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
+        
     <url>
-     <loc>/CppPrimer/ch02 变量和基本类型/</loc>
-     <lastmod>2018-07-05</lastmod>
+     <loc></loc>
+     <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
+        
+    
+
+    
+        
     <url>
-     <loc>/CppPrimer/ch03 字符串、向量和数组/</loc>
-     <lastmod>2018-07-05</lastmod>
+     <loc></loc>
+     <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
-    <url>
-     <loc>/CppPrimer/ch04 表达式/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/ch05 语句/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/ch06 函数/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/ch07 类/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/ch08 IO库/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/ch09 顺序容器/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/ch10 泛型算法/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/ch11 关联容器/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/ch12 动态内存/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/ch13 拷贝控制/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/ch14 操作重载与类型转换/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/ch15 面向对象程序设计/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/ch16 模板与泛型编程/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/ch17 标准库特殊设施/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/ch18 用于大型程序的工具/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/cheatsheet/static的3个用途/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/cheatsheet/若干种typedef/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/cheatsheet/类内初始值/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/cheatsheet/运算符重载/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/CppPrimer/cheatsheet/向set中插入自定义类型对象/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/EffectiveCpp/1 让自己习惯C++/条款01：视C++为一个语言联邦/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/EffectiveCpp/1 让自己习惯C++/条款02：尽量以const, enum, inline替换#define/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/EffectiveCpp/1 让自己习惯C++/条款03：尽可能使用const/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>/EffectiveCpp/1 让自己习惯C++/条款04：确定对象被使用前已被初始化/</loc>
-     <lastmod>2018-07-05</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
+        
+    
+
 </urlset>
