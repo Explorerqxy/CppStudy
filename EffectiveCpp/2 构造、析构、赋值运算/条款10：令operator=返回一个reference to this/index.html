@@ -38,7 +38,7 @@
     
     
       
-        <title>条款08：别让异常逃离析构函数 - C++ Study Note</title>
+        <title>条款10：令operator=返回一个reference to this - C++ Study Note</title>
       
     
     
@@ -95,7 +95,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
     
-      <a href="#08" tabindex="1" class="md-skip">
+      <a href="#10operatorreference-to-this" tabindex="1" class="md-skip">
         跳转至
       </a>
     
@@ -121,7 +121,7 @@
                 C++ Study Note
               </span>
               <span class="md-header-nav__topic">
-                条款08：别让异常逃离析构函数
+                条款10：令operator=返回一个reference to this
               </span>
             
           
@@ -818,20 +818,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-      
-    
-    
-    <a href="./" title="条款08：别让异常逃离析构函数" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../%E6%9D%A1%E6%AC%BE08%EF%BC%9A%E5%88%AB%E8%AE%A9%E5%BC%82%E5%B8%B8%E9%80%83%E7%A6%BB%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/" title="条款08：别让异常逃离析构函数" class="md-nav__link">
       条款08：别让异常逃离析构函数
     </a>
-    
   </li>
 
         
@@ -851,11 +842,20 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../%E6%9D%A1%E6%AC%BE10%EF%BC%9A%E4%BB%A4operator%3D%E8%BF%94%E5%9B%9E%E4%B8%80%E4%B8%AAreference%20to%20this/" title="条款10：令operator=返回一个reference to this" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+    <a href="./" title="条款10：令operator=返回一个reference to this" class="md-nav__link md-nav__link--active">
       条款10：令operator=返回一个reference to this
     </a>
+    
   </li>
 
         
@@ -896,63 +896,55 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/demon90s/CppStudy/tree/master/study_notes/EffectiveCpp/2 构造、析构、赋值运算/条款08：别让异常逃离析构函数.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/demon90s/CppStudy/tree/master/study_notes/EffectiveCpp/2 构造、析构、赋值运算/条款10：令operator=返回一个reference to this.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="08">条款08：别让异常逃离析构函数</h1>
+                <h1 id="10operatorreference-to-this">条款10：令operator=返回一个reference to this</h1>
 <hr />
-<p>C++并不禁止析构函数吐出异常，但它不鼓励你这样做。因为这可能造成同时存在多个异常，C++认为这太多了。因此只要析构函数吐出了异常，程序可能过早结束或出现不明确的行文。</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>在CentOS7和VS2015上面测试，都没有办法捕获析构函数吐出的异常，程序结束。</p>
-</div>
-<p>但如果析构函数必须执行一个动作，而该动作可能会在失败时抛出异常，怎么办？这时候可以在析构函数内将异常捕获并处理。</p>
-<p>比如：</p>
-<div class="codehilite"><pre><span></span><span class="n">DBConn</span><span class="o">::~</span><span class="n">DBConn</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="k">try</span> <span class="p">{</span> <span class="n">db</span><span class="p">.</span><span class="n">close</span><span class="p">();</span> <span class="p">}</span>
-    <span class="k">catch</span> <span class="p">(...)</span> <span class="p">{</span>
-        <span class="c1">// 制作运转记录，记下对close的调用失败</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">abort</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<p>我们可以把赋值写成连锁的形式：</p>
+<div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="o">=</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
 </pre></div>
 
 
-<p>一般而言，将异常吞掉是个坏主意，因为它压制了“某些动作失败”的重要信息！然而有时吞下异常也比负担“草率结束程序”或“不明确行为带来的风险”好。</p>
-<p>还有一个较佳的策略是重新设计DBConn接口，使其客户有机会对可能出现的问题作出反应。比如提供一个close函数，赋予客户一个机会得以处理“因该操作而发生的异常”。DBConn也可以在析构函数中调用close。</p>
-<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">DBConn</span>
+<p>赋值采用右结合律，所以上述操作符解析为：</p>
+<div class="codehilite"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">z</span> <span class="o">=</span> <span class="mi">15</span><span class="p">));</span>
+</pre></div>
+
+
+<p>为了实现“连锁赋值”，赋值操作符必须返回一个reference指向操作符左侧的实参。这是你为classes实现赋值操作符时应该遵循的协议：</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Widget</span>
 <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-    <span class="kt">void</span> <span class="n">close</span><span class="p">()</span>        <span class="c1">// 供客户使用的新函数</span>
+    <span class="n">Widget</span><span class="p">()</span> <span class="o">:</span> <span class="n">i</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="n">Widget</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Widget</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="n">db</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
-        <span class="n">closed</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">rhs</span><span class="p">.</span><span class="n">i</span><span class="p">;</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="o">~</span><span class="n">DBConn</span><span class="p">()</span>
+    <span class="n">Widget</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">+=</span><span class="p">(</span><span class="k">const</span> <span class="n">Widget</span><span class="o">&amp;</span> <span class="n">rhs</span><span class="p">)</span>   <span class="c1">// 适用于+=, -=, *=, 等等</span>
     <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">closed</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">try</span> <span class="p">{</span> <span class="n">db</span><span class="p">.</span><span class="n">close</span><span class="p">();</span> <span class="p">}</span>
-            <span class="k">catch</span> <span class="p">(...)</span> <span class="p">{</span>
-                <span class="c1">// 制作运转记录，记下对close的调用失败</span>
-                <span class="n">std</span><span class="o">::</span><span class="n">abort</span><span class="p">();</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="n">rhs</span><span class="p">.</span><span class="n">i</span><span class="p">;</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
     <span class="p">}</span>
+
+    <span class="n">Widget</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span> <span class="n">rhs</span><span class="p">)</span>  <span class="c1">// 也适用，即使参数类型不符合协定</span>
+    <span class="p">{</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">rhs</span><span class="p">;</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+
 <span class="k">private</span><span class="o">:</span>
-    <span class="n">DBConnection</span> <span class="n">db</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">closed</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+<span class="p">};</span>
 </pre></div>
 
 
+<p>这是个协议，如果不遵循它，代码一样可以通过编译。然而这份协议被所有内置类型和标准库程序遵守。所以你也应该遵守。</p>
 <div class="admonition tip">
 <p class="admonition-title">请记住</p>
-<ul>
-<li>析构函数绝对不要吐出异常。如果一个被析构函数调用的函数可能抛出异常，析构函数应该捕捉任何异常，然后吞下它们（不传播）或结束程序。</li>
-<li>如果客户需要对某个操作函数运行期间抛出的异常做出反应，那么class应该提供一个普通函数（而非在析构函数中）执行该操作。</li>
-</ul>
+<p>令赋值（assignment）操作符返回一个reference to *this。</p>
 </div>
                 
                   
@@ -974,7 +966,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../%E6%9D%A1%E6%AC%BE07%EF%BC%9A%E4%B8%BA%E5%A4%9A%E6%80%81%E5%9F%BA%E7%B1%BB%E5%A3%B0%E6%98%8Evirtual%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/" title="条款07：为多态基类声明virtual析构函数" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../%E6%9D%A1%E6%AC%BE09%EF%BC%9A%E7%BB%9D%E4%B8%8D%E5%9C%A8%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84%E8%BF%87%E7%A8%8B%E4%B8%AD%E8%B0%83%E7%94%A8virtual%E5%87%BD%E6%95%B0/" title="条款09：绝不在构造和析构过程中调用virtual函数" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -983,25 +975,11 @@
                 <span class="md-footer-nav__direction">
                   后退
                 </span>
-                条款07：为多态基类声明virtual析构函数
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../%E6%9D%A1%E6%AC%BE09%EF%BC%9A%E7%BB%9D%E4%B8%8D%E5%9C%A8%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84%E8%BF%87%E7%A8%8B%E4%B8%AD%E8%B0%83%E7%94%A8virtual%E5%87%BD%E6%95%B0/" title="条款09：绝不在构造和析构过程中调用virtual函数" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  前进
-                </span>
                 条款09：绝不在构造和析构过程中调用virtual函数
               </span>
             </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
           </a>
+        
         
       </nav>
     </div>
