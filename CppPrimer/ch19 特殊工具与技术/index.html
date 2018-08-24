@@ -1519,7 +1519,7 @@ dynamic_cast&lt;type&amp;&amp;&gt;(e)
 <p>要想通过一个指向成员函数的指针进行函数调用，必须首先利用<code>.*</code>或<code>-&gt;*</code>将该指针绑定到一个对象上。因此，成员指针不是一个可调用对象，这样的指针不支持函数调用运算符。</p>
 <p><strong>使用function生成一个可调用对象</strong></p>
 <p>一种方法是使用标准库模板function：</p>
-<div class="codehilite"><pre><span></span><span class="n">function</span><span class="o">&lt;</span><span class="kt">bool</span> <span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">fcn</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">string</span><span class="p">.</span><span class="n">empty</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="n">function</span><span class="o">&lt;</span><span class="kt">bool</span> <span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">fcn</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">string</span><span class="o">::</span><span class="n">empty</span><span class="p">;</span>
 <span class="n">find_if</span><span class="p">(</span><span class="n">svec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">svec</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">fcn</span><span class="p">);</span>
 </pre></div>
 
